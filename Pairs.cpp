@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -23,26 +24,24 @@ int pairs(int k, vector<int> arr)
 {
 	int retValue = 0;
 
+	sort(arr.begin(), arr.end());
+
 	if (k == 0)
 		return retValue;
 
 	for (int i = 0; i < arr.size() - 1; i++)
 	{
-		int temp = 0;
-
 		for (int j = i + 1; j < arr.size(); j++)
 		{
-			if (abs(arr[i] - arr[j]) == k)
+			if (arr[j] - arr[i] == k)
 			{
 				retValue++;
-				temp++;
-
-				if (arr[i] < k)
-					break;
-
-				if (temp > 1)
-					break;
+				
+				break;
 			}
+			
+			if (arr[j] - arr[i] > k)
+				break;
 		}
 	}
 
